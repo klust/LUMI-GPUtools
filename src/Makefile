@@ -3,7 +3,7 @@ BUILDBINDIR=../bin
 
 SHELL=bash
 
-all : $(EXECUTABLES:%=$(BUILDBINDIR)/%)
+build : $(EXECUTABLES:%=$(BUILDBINDIR)/%)
 
 $(BUILDBINDIR)/select_gpu : select_gpu.c Makefile
 	mkdir -p $(BUILDBINDIR)
