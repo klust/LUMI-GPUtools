@@ -10,7 +10,7 @@ $(BUILDBINDIR)/select_gpu : select_gpu.c Makefile
 	gcc -O2 $< -o $@
 
 clean :
-	-/bin/rm -f $(EXECUTABLES:%=.$(BUILDBINDIR)/%)
+	-/bin/rm -f $(EXECUTABLES:%=$(BUILDBINDIR)/%)
 
 test : test_select_gpu
 
