@@ -1,0 +1,52 @@
+.\" Written by Kurt Lust, kurt.lust@uantwerpen.be for the LUMI consortium.
+.TH man 1 "2 January 2023" "0.1" "select_gpu (lumi-GPUtools) command"
+
+.SH NAME
+select_gpu \- Run a command setting \fBROCR_VISIBLE_DEVICES\fR based on \fBSLURM_LOCALID\fR
+
+.SH DESCRIPTION
+\fBselect_gpu\fR runs the command given as the argument(s) of the function
+in the environment in which \fBselect_gpu\fR, augmented with the environment
+variable \fBROCR_VISIBLE_DEVICES\fR which is set based on \fBSLURM_LOCALID\fR.
+It is meant to be used in a SLURM \fBsrun\fR command that already uses rank
+reordering, so that GPU 0 should be bound to the task with local task ID -0,
+etc.
+
+Note that the value of \fBROCR_VISIBLE_DEVICES\fR is overwritten if it is
+already set.
+
+There is also a script version of the command, \fBselect_gpu.sh\fR, which
+corresponds to the version used in the GPU examples of the LUMI documentation.
+
+.SH EXAMPLE
+
+The following example is a job script to start a job consisting of 128 MPI
+ranks each using a single GPU on LUMI-G in the standard-g partition:
+
+.EX
+#!/bin/bash
+#SBATCH --partition=standard-g  # Partition (queue) name
+#SBATCH --nodes=16              # Total number of nodes 
+#SBATCH --ntasks-per-node=8     # 8 MPI ranks per node, 128 total (16x8)
+#SBATCH --gpus-per-node=8       # Allocate one gpu per MPI rank
+#SBATCH --time=1-12:00:00       # Run time (d-hh:mm:ss)
+#SBATCH --account=project_<id>  # Project for billing
+
+CPU_BIND="map_cpu:48,56,16,24,1,8,32,40"
+
+export MPICH_GPU_SUPPORT_ENABLED=1
+
+srun --cpu-bind=${CPU_BIND} select_gpu <executable> <args>
+.EE
+
+Note that this job script assumes that all modules that are needed are
+already loaded in the shell from which the script is submitted. If not you'll 
+have to add the appropriate \fBmodule load\fR commands just after the
+\fB#SBATCH\fR lines.
+
+.SH SEE ALSO
+serial_check(1), omp_check(1), hybrid_check(1), lumi-CPEtools(1)
+
+.SH AUTHOR
+Kurt Lust (Kurt.Lust@uantwerpen.be) for the LUMI consortium
+

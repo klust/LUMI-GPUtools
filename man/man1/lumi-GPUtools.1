@@ -1,0 +1,22 @@
+.\" Written by Kurt Lust, kurt.lust@uantwerpen.be for the LUMI consortium.
+.TH man 1 "2 January 2023" "0.1" "lumi-GPUtools overview"
+
+.SH NAME
+lumi-GPUtools \- Various CPE-independent tools to ease life on the LUMI-G GPUs.
+
+.SH DESCRIPTION
+GPUtools contains various tools that make life on the LUMI-G GPUs a bit easier.
+Several tools are provided as binary and as a shell script.
+
+Commands:
+.TP
+\fBselect-gpu\fR
+A small program that runs the command given as the argument(s) of \fBselect_gpu\fR
+but first sets the environment variable \fBROCR_VISIBLE_DEVICES\fR based on the
+value of \fBSLURM_LOCALID\fR. It is meant to be used with the \fBsrun\fR command.
+
+.SH SEE ALSO
+select-gpu(1)
+
+.SH AUTHOR
+Kurt Lust (Kurt.Lust@uantwerpen.be) for the LUMI consortium
