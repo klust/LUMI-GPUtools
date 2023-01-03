@@ -18,7 +18,7 @@ RM = $(shell which rm || echo "rm")
 build : $(EXECUTABLES:%=$(BUILDBINDIR)/%)
 
 $(BUILDBINDIR)/select_gpu : select_gpu.c Makefile
-	$(MDKIR) -p $(BUILDBINDIR)
+	$(MKDIR) -p $(BUILDBINDIR)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean :
@@ -33,6 +33,3 @@ test_select_gpu : $(BUILDBINDIR)/select_gpu
 	    then echo "Test of select_gpu succeeded" ; \
 	    else echo "Test of select_gpu failed" ; exit 1 ; \
 	fi
-
-
-
