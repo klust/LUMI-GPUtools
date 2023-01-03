@@ -18,10 +18,10 @@ test :
 	$(MAKE) -C src test
 	
 install : build
-	@$(MKDIR) -p $(PREFIX)/share/licenses
+	@$(MKDIR) -p $(PREFIX)/share/licenses/lumi-GPUtools
 	@$(CP) -rf bin $(PREFIX)
 	@$(CP) -rf man $(PREFIX)/share
-	@$(CP) -f LICENSE $(PREFIX)/share/licenses/LICENSE.lumi-GPUtools
+	@$(CP) -f LICENSE $(PREFIX)/share/licenses/lumi-GPUtools/LICENSE
 	
 clean :
 	$(MAKE) -C src clean
