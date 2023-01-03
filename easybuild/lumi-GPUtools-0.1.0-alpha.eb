@@ -1,7 +1,7 @@
 easyblock = 'ConfigureMake'
 
 name =    'lumi-GPUtools'
-version = '47cabbe' # Set to the commit id.
+version = '0.1.0-alpha' # Set to the commit id.
 
 homepage = 'https://github.com/klust/LUMI-GPUtools'
 
@@ -24,14 +24,11 @@ docurls = [
 toolchain = SYSTEM
 
 sources = [{
-    'filename': '%(name)s-%(version)s.tar.gz',
-    'git_config': {
-        'url':          'https://github.com/klust',
-        'repo_name':    'LUMI-GPUtools',
-        'commit':       '%(version)s',
-        'keep_git_dir': False,
-    },
+    'filename':          '%(name)s-%(version)s.tar.gz',
+    'download_filename': 'v%(version)s.tar.gz',
+    'source_urls':       ['https://github.com/klust/LUMI-GPUtools/archive/refs/tags/'],
 }]
+#checksums = ['']
 
 skipsteps = ['configure']
 
